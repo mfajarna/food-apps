@@ -72,7 +72,7 @@ const DetailOrder = ({dataOrderan, total, resetDatas, refRb, dataDrinks, onPress
             "first_name": "angel",
             "last_name": "caca",
             "email": "angel.caca@midtrans.com",
-            "phone": "081223323423"
+            "phone": "085777735141"
           },
           "qris": {
             "acquirer": "gopay"
