@@ -14,21 +14,13 @@ type CardProps = {
     harga: number,
     id?: number,
     total?: any,
-    onPress?: void
+    onPress?: void,
 }
 
 const CardMenuItem = ({title, harga, id, total}: CardProps) => {
-    const data = {
-        id: id,
-        nama: title,
-        harga
-    }
 
-    total = data;
-    const[jumlah, setJumlah] = React.useState(0);
 
-    const handleClickAddJumlah = () => setJumlah(jumlah+1)
-    const handleClickRemoveJumlah = () => setJumlah(jumlah-1)
+
 
   return (
     <View style={styles.container}>
@@ -56,46 +48,35 @@ const CardMenuItem = ({title, harga, id, total}: CardProps) => {
 
      <View style={{
          justifyContent: 'flex-end',
-         marginRight: 5
      }}>
-         {jumlah == 0 ? (
-            <TouchableOpacity onPress={handleClickAddJumlah} style={{
-                backgroundColor: Colors.Secondary,
-                borderRadius: 5,
-            }}>
-                <Icon name='add' color={'white'} />
-            </TouchableOpacity>
-         ) : 
-         jumlah > 0 ? (
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <TouchableOpacity onPress={handleClickRemoveJumlah} style={{
+         <View style={{
+             flexDirection: 'row'
+         }}>
+            <TouchableOpacity onPress={() => console.log('test')} style={{
                     backgroundColor: Colors.Secondary,
                     borderRadius: 5,
+                    paddingHorizontal: 3,
+                    paddingVertical: 2,
+                 
                 }}>
-                    <Icon name='remove' color={'white'} />
+                    <Icon name='shopping-cart' color={'black'} />
                 </TouchableOpacity>
 
-                <View style={{
-                    marginHorizontal: 5
-                }}>
-                    <Text>{jumlah}</Text>
-                </View>
-           
-                <TouchableOpacity onPress={handleClickAddJumlah} style={{
+                <TouchableOpacity onPress={() => console.log('')} style={{
                     backgroundColor: Colors.Secondary,
                     borderRadius: 5,
+                    
                 }}>
                     <Icon name='add' color={'white'} />
                 </TouchableOpacity>
 
-            </View>
-            
-         )
-         :
-         (
-             <Text>A</Text>
-         )
-        }
+                <TouchableOpacity onPress={() => console.log('')} style={{
+                        backgroundColor: Colors.Secondary,
+                        borderRadius: 5,
+                    }}>
+                        <Icon name='remove' color={'white'} />
+                </TouchableOpacity>
+         </View>
        
      </View>
     </View>
@@ -108,6 +89,7 @@ const styles = StyleSheet.create({
     container:{
         flexDirection: 'row',
         marginBottom: 10,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        paddingHorizontal: 10
     }
 })

@@ -3,4 +3,4 @@ export const setLoading = (value: any) => {
         type: 'SET_LOADING', 
         value
     };
-  };
+};

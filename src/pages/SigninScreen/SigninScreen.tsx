@@ -17,17 +17,6 @@ type Props = NativeStackScreenProps<RootStackParamsList, "SigninScreen">
 
 const SigninScreen = ({navigation}: Props) => {
     
-    let result = false;
-
-    const data = [
-        {
-            nama: 'kojaydev'
-        },
-        {
-            nama: 'mfajarna'
-        }
-    ]
-
     const handleSignupPage = () => navigation.navigate("SignupScreen");
     const handleSigninPage = async () => {
 
@@ -37,11 +26,17 @@ const SigninScreen = ({navigation}: Props) => {
         const username = form.username;
         const password = form.password;
 
-       if(username == user.username && password == user.password){
-            navigation.navigate("DashboardScreen");
+       if(username === '' || password === ''){
+            Alert.alert('Username atau password tidak boleh kosong');
        }else{
-           Alert.alert('Username atau password tidak ada!');
+            if(username == user.username || password == user.password){
+                navigation.navigate("DashboardScreen");
+        }else{
+            Alert.alert('Username atau password tidak ada!');
+        }
        }
+
+
 
     }
     const[form, setForm] = UseForm({
