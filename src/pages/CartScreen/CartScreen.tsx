@@ -14,6 +14,7 @@ import { addToCart, deleteAllCart, deleteCart, removeCart } from '../../utils/re
 import { decreaseQty, increaseQty, resetData } from '../../utils/redux/toolkit/MyProductSlice'
 import RBSheet from 'react-native-raw-bottom-sheet'
 import DetailOrder from './components/DetailOrder'
+import axios from 'axios'
 
 const CartScreen = () => {
   const[review, setReview] = React.useState([])
@@ -33,9 +34,6 @@ const CartScreen = () => {
 
     return total;
   }
-
-  console.log(myCartItems);
-  
   return (
     <SafeAreaView style={styles.container}>
       <View style={{paddingHorizontal: 10}}>
@@ -126,11 +124,7 @@ const CartScreen = () => {
                                   <Icon name='remove' color={'white'} />
                           </TouchableOpacity>
                       )}
-        
-          
-    
                     </View>
-                  
                 </View>
               </View>
             )

@@ -8,14 +8,25 @@ import { Colors } from '../../utils/colors/Colors'
 import { useNavigation } from '@react-navigation/native'
 
 type Props = {
-  title: string
+  title: string,
+  type?: string,
 }
 
-const Header = ({title}: Props) => {
+const Header = ({title, type}: Props) => {
     const nav = useNavigation();
+    
+    const handleBackNav = () => {
+      switch(type){
+        case 'dashboard':
+          nav.navigate('DashboardScreen');
+        default:
+          nav.goBack();
+          
+      }
+    }
   return (
     <View style={styles.container}>
-      <Icon name='arrow-back-ios' color={'black'} onPress={() => nav.goBack()} />
+      <Icon name='arrow-back-ios' color={'black'} onPress={handleBackNav}/>
       <Text style={[GlobalStyles.customText, {
           fontFamily: Fonts.SemiBold,
           fontSize: responsiveFonts(18),

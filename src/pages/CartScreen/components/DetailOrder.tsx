@@ -8,18 +8,88 @@ import { useDispatch } from 'react-redux'
 import { deleteAllCart } from '../../../utils/redux/toolkit/MyCartSlice'
 import { resetData } from '../../../utils/redux/toolkit/MyProductSlice'
 import { resetDataDrinks } from '../../../utils/redux/toolkit/MyProductDrinkSlice'
+import { orderTransactios } from '../../../API/transactions-handler'
+import { useNavigation } from '@react-navigation/native'
+import axios from 'axios'
 
 type DetailOrderType = {
     dataOrderan: Array<any>,
     total: number,
     resetDatas: any,
     dataDrinks: any,
-    refRb: any
+    refRb: any,
+    onPress?: any
 }
 
-const DetailOrder = ({dataOrderan, total, resetDatas, refRb, dataDrinks}: DetailOrderType) => {
+const DetailOrder = ({dataOrderan, total, resetDatas, refRb, dataDrinks, onPress}: DetailOrderType) => {
 
     const dispatch = useDispatch();
+    const navigation = useNavigation();
+
+    const newArray = dataOrderan.map(obj => {
+        const newObj = {};
+      
+        Object.keys(obj).forEach(oldKey => {
+          // Define the mapping of old key names to new key names
+          const keyMap = {
+            nama: 'name',
+            qty: 'quantity',
+            harga: 'price',
+
+            // Add more key mappings as needed
+          };
+      
+          const newKey = keyMap[oldKey] || oldKey;
+          newObj[newKey] = obj[oldKey];
+        });
+      
+        return newObj;
+      });
+
+    const handlerTransactions = async () => {
+
+        let data = JSON.stringify({
+          "payment_type": "qris",
+          "transaction_details": {
+            "order_id": "order03",
+            "gross_amount": total
+          },
+          "item_details": newArray,
+          "customer_details": {
+            "first_name": "angel",
+            "last_name": "caca",
+            "email": "angel.caca@midtrans.com",
+            "phone": "081223323423"
+          },
+          "qris": {
+            "acquirer": "gopay"
+          }
+        });
+    
+        let config: object = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: 'https://app.sandbox.midtrans.com/snap/v1/transactions',
+            headers: { 
+              'Content-Type': 'application/json', 
+              'Authorization': 'Basic U0ItTWlkLXNlcnZlci1UZWNUQ1k1MGh1MmNtWEZtS2s3anI3YjU6U0ItTWlkLXNlcnZlci1UZWNUQ1k1MGh1MmNtWEZtS2s3anI3YjU='
+            },
+            data : data
+        }
+    
+        const result = axios(config)
+        .then((res) => {
+            console.log(JSON.stringify(res.data));
+            const redirect_url = res.data.redirect_url;
+
+            navigation.navigate('OrderProcessScreen', {redirect_url});
+        }).catch((err) => {
+            console.log(err.response)
+        })
+    
+        return Promise.resolve(result);
+      }
+      
 
   return (
     <View style={styles.container}>
@@ -70,6 +140,8 @@ const DetailOrder = ({dataOrderan, total, resetDatas, refRb, dataDrinks}: Detail
                 dispatch(deleteAllCart(dataOrderan))
                 dispatch(resetData(resetDatas))
                 dispatch(resetDataDrinks(dataDrinks))
+                handlerTransactions()
+                
                 refRb.current.close()
             }}
         >

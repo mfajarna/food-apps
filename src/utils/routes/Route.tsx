@@ -8,6 +8,7 @@ import DashboardScreen from "../../pages/DashboardScreen/DashboardScreen";
 import MakananScreen from "../../pages/MakananScreen/MakananScreen";
 import MinumanScreen from "../../pages/MinumanScreen/MinumanScreen";
 import CartScreen from "../../pages/CartScreen/CartScreen";
+import OrderProcessScreen from "../../pages/OrderProcessScreen/OrderProcessScreen";
 
 
 export type RootStackParamsList = {
@@ -18,7 +19,8 @@ export type RootStackParamsList = {
     DashboardScreen: undefined,
     MakananScreen: undefined,
     MinumanScreen: undefined,
-    CartScreen: undefined
+    CartScreen: undefined,
+    OrderProcessScreen: undefined
 }
 
 const Stack = createNativeStackNavigator<RootStackParamsList>();
@@ -90,7 +92,15 @@ const Route = () => {
                     options={{
                         headerShown: false
                     }}
-                />      
+                />   
+
+                <Stack.Screen
+                    name="OrderProcessScreen"
+                    component={OrderProcessScreen}
+                    options={{
+                        headerShown: false
+                    }}
+                />   
             </Stack.Navigator>
         </NavigationContainer>
     )
