@@ -44,14 +44,27 @@ const DetailOrder = ({dataOrderan, total, resetDatas, refRb, dataDrinks, onPress
         });
       
         return newObj;
-      });
+    });
+
+
+    function makeid(length: number) {
+        let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const charactersLength = characters.length;
+        let counter = 0;
+        while (counter < length) {
+          result += characters.charAt(Math.floor(Math.random() * charactersLength));
+          counter += 1;
+        }
+        return result;
+    }
 
     const handlerTransactions = async () => {
 
         let data = JSON.stringify({
           "payment_type": "qris",
           "transaction_details": {
-            "order_id": "order03",
+            "order_id": `TRX-${makeid(10)}`,
             "gross_amount": total
           },
           "item_details": newArray,
@@ -88,7 +101,8 @@ const DetailOrder = ({dataOrderan, total, resetDatas, refRb, dataDrinks, onPress
         })
     
         return Promise.resolve(result);
-      }
+    }
+
       
 
   return (

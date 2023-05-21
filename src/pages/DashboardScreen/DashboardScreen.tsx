@@ -26,6 +26,8 @@ const DashboardScreen = ({navigation}: Props) => {
         return Promise.resolve(user);
     }
 
+
+
     React.useEffect(() => {
         getUserInfo();
     }, [])
