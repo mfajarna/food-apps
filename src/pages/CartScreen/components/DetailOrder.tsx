@@ -121,16 +121,19 @@ const DetailOrder = ({dataOrderan, total, resetDatas, refRb, dataDrinks, onPress
                 }}>
                     <Text style={[GlobalStyles.customText, {
                         fontFamily: Fonts.SemiBold,
-                        fontSize: responsiveFonts(15)
+                        fontSize: responsiveFonts(15),
+                        color: 'black'
                     }]}>{item.nama}</Text>
                     <Text style={[GlobalStyles.customText, {
                         fontFamily: Fonts.Medium,
                         marginTop: 2,
-                        fontSize: responsiveFonts(13)
+                        fontSize: responsiveFonts(13),
+                        color: 'black'
                     }]}>Jumlah: {item.qty}</Text>
                     <Text style={[GlobalStyles.customText, {
                         fontFamily: Fonts.Medium,
-                        fontSize: responsiveFonts(13)
+                        fontSize: responsiveFonts(13),
+                        color: 'black'
                     }]}>Harga: Rp. {item.qty * item.harga}</Text>
                 </View>
             )
@@ -145,7 +148,8 @@ const DetailOrder = ({dataOrderan, total, resetDatas, refRb, dataDrinks, onPress
         <View>
             <Text style={[GlobalStyles.customText, {
                 fontFamily: Fonts.SemiBold,
-                fontSize: responsiveFonts(17)
+                fontSize: responsiveFonts(17),
+                color: 'black'
             }]}>Total Harga: Rp. {total}</Text>
         </View>
 
