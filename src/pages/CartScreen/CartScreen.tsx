@@ -19,6 +19,7 @@ const CartScreen = () => {
   const[review, setReview] = React.useState([])
   const myCartItems = useSelector(state => state.cart)
   const myMakanan = useSelector(state => state.product);
+  const myDrinks = useSelector(state => state.drink);
   const dispatch = useDispatch();
 
   const refRBSheet = React.useRef();
@@ -199,6 +200,7 @@ const CartScreen = () => {
           total={getTotal()}
           resetDatas={myMakanan}
           refRb={refRBSheet}
+          dataDrinks={myDrinks}
         />
       </RBSheet>
     </SafeAreaView>

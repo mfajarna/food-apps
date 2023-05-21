@@ -7,15 +7,17 @@ import { Colors } from '../../../utils/colors/Colors'
 import { useDispatch } from 'react-redux'
 import { deleteAllCart } from '../../../utils/redux/toolkit/MyCartSlice'
 import { resetData } from '../../../utils/redux/toolkit/MyProductSlice'
+import { resetDataDrinks } from '../../../utils/redux/toolkit/MyProductDrinkSlice'
 
 type DetailOrderType = {
     dataOrderan: Array<any>,
     total: number,
     resetDatas: any,
+    dataDrinks: any,
     refRb: any
 }
 
-const DetailOrder = ({dataOrderan, total, resetDatas, refRb}: DetailOrderType) => {
+const DetailOrder = ({dataOrderan, total, resetDatas, refRb, dataDrinks}: DetailOrderType) => {
 
     const dispatch = useDispatch();
 
@@ -67,6 +69,7 @@ const DetailOrder = ({dataOrderan, total, resetDatas, refRb}: DetailOrderType) =
             onPress={() => {
                 dispatch(deleteAllCart(dataOrderan))
                 dispatch(resetData(resetDatas))
+                dispatch(resetDataDrinks(dataDrinks))
                 refRb.current.close()
             }}
         >
